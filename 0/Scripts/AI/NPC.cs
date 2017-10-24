@@ -40,7 +40,7 @@ public class NPC : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z) && !Game.pause && inView)
         {
             world.StartTalk(/*storyID*/);
-            //Game.player().GetComponent<Controller>().Move(0);
+            Game.player().GetComponent<Controller>().Move(0);
         }
     }
 

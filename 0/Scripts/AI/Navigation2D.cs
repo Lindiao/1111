@@ -7,7 +7,6 @@ public class Navigation2D : MonoBehaviour {
     public float stoppingDistance = 0.05f;
     internal Vector3 targetPos;
     internal bool moving = false;
-    //internal bool enableMove = true;
     Rigidbody2D body;
 
     void Awake()
@@ -19,7 +18,7 @@ public class Navigation2D : MonoBehaviour {
     {
         float movSpeed = Time.fixedDeltaTime * speed * Mathf.Sign(targetPos.x - transform.position.x);
         Vector3 vel = body.velocity;
-        vel.x = (moving && !Game.pause/* && enableMove*/) ? movSpeed : 0;
+        vel.x = (moving && !Game.pause) ? movSpeed : 0;
         body.velocity = vel;
 
         // 方向判定
@@ -30,15 +29,10 @@ public class Navigation2D : MonoBehaviour {
             transform.eulerAngles = angle;
         }
         // 到達目標點停止
-        if (Mathf.Abs(transform.position.x - targetPos.x) <= stoppingDistance)
+        if (ReachGoal())
         {
             StopMove();
         }
-
-        /*if (ReachGoal())
-        {
-            StopMove();
-        }*/
     }
 
     //======
@@ -60,7 +54,7 @@ public class Navigation2D : MonoBehaviour {
         StartMove();
     }
 
-    /*public void Follow(Transform tar)
+    public void Follow(Transform tar)
     {
         targetPos = tar.position;
         if (!ReachGoal())
@@ -68,9 +62,9 @@ public class Navigation2D : MonoBehaviour {
             StartMove();
         }
     }
-
+    
     public bool ReachGoal()
     {
         return Mathf.Abs(transform.position.x - targetPos.x) <= stoppingDistance;
-    }*/
+    }
 }
