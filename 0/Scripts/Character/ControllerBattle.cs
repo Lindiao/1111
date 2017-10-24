@@ -3,15 +3,15 @@ using System.Collections;
 
 public class ControllerBattle : Controller
 {
-    //public GameObject bulletObject;
+    public GameObject bulletObject;
 
     public override void Control()
     {
         base.Control();
 
-        //if (state.IsName("Base.Damage")) { return; }
+        if (state.IsName("Base.Damage")) { return; }
 
-        if (Input.GetKeyDown(KeyCode.Z) /*&& !btn*/)
+        if (Input.GetKeyDown(KeyCode.Z) && !btn)
         {
             Move(0);
             lockMove = true;
@@ -69,13 +69,13 @@ public class ControllerBattle : Controller
     //=======
     // 事件
     //=======
-    /*public override void Shot()
+    public override void Shot()
     {
         base.Shot();
         Transform pt = transform.Find("bulletPoint");
         Instantiate(bulletObject, pt.position, pt.rotation);
     }
-
+    
     public void Damage(float dmg)
     {
         if (state.IsName("Base.Damage")) { return; }
@@ -95,13 +95,12 @@ public class ControllerBattle : Controller
             // Damage
             anim.SetTrigger("Damage");
         }
-
     }
-
+    
     public IEnumerator Reload()
     {
         yield return new WaitForSeconds(3);
         Game.screen().FadeAndGo(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         Game.Reset();
-    }*/
+    }
 }
