@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game {
+public static class Game {
 
     public static SaveData sav = new SaveData();
     public static bool pause = false;
@@ -17,16 +17,22 @@ public class Game {
     {
         return UnityEngine.Object.FindObjectOfType<ScreenUI>();
     }
+    // 快速取得角色
+    public static Transform player()
+    {
+        return GameObject.FindWithTag("Player").transform;
+    }
 
     public class SaveData
     {
-        public float maxHp = 5f;
-        public float hp = 2.5f;
+        public float maxHp = 500f;
+        public float hp = 500f;
         public float maxSp = 500f;
         public float sp = 500f;
         public int money = 0;
         public float skillCost = 100f;
-        public float regSpeed = 10f;
+        public float regSpeed_SP = 15f;
+        public float regSpeed_HP = 1.5f;//test
         public float ammoCost = 5f;
 
         public void GainMoney(int i)
@@ -39,10 +45,24 @@ public class Game {
             sp = Mathf.Clamp(sp - s, 0, maxSp);
         }
 
+        //test
+        public void CostHP(float h)
+        {
+            hp = Mathf.Clamp(hp - h, 0, maxHp);
+        }
+        //test
+
         public void RegenSP(float f)
         {
-            CostSP(-regSpeed * f);
+            CostSP(-regSpeed_SP * f);
         }
+
+        //test
+        public void RegenHP(float h)
+        {
+            CostHP(-regSpeed_HP * h);
+        }
+        //test
 
         public bool CanUseSkill()
         {
@@ -54,10 +74,10 @@ public class Game {
             return sp >= ammoCost;
         }
 
-        /*public float Damage(float dmg)
+        public float Damage(float dmg)
         {
             hp = Mathf.Clamp(hp - dmg, 0, maxHp);
             return hp;
-        }*/
+        }
     }
 }

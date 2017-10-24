@@ -3,23 +3,25 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class MainUI : MonoBehaviour {
-    public Transform hearts;
-    public Sprite[] heartImage;
+    //public Transform hearts;
+    //public Sprite[] heartImage;
     public RectTransform sp;
+    public RectTransform hp;//test
     public Text coinText;
     int coin = 0;
 
-    void Awake()
+    /*void Awake()
     {
         DrawMaxHP();
-    }
+    }*/
 
     void Update()
     {
         DrawSP();
         DrawCoin();
+        DrawHP();
     }
-
+    /*
     void DrawMaxHP()
     {
         for (int i = 1; i < Game.sav.maxHp; i++)
@@ -39,7 +41,7 @@ public class MainUI : MonoBehaviour {
             img.sprite = heartImage[0];
         }
 
-        for (int i = 1; i < hp; i++)
+        for (int i = 1; i <= hp; i++)
         {
             hearts.GetChild(i - 1).GetComponent<Image>().sprite = heartImage[2];
         }
@@ -48,6 +50,12 @@ public class MainUI : MonoBehaviour {
         {
             hearts.GetChild((int)Mathf.Floor(hp)).GetComponent<Image>().sprite = heartImage[1];
         }
+    }*/
+
+    void DrawHP()
+    {
+        float h = Game.sav.hp;
+        hp.sizeDelta = new Vector2(Mathf.Lerp(hp.sizeDelta.x, h, 0.12f), hp.sizeDelta.y);
     }
 
     void DrawSP()
