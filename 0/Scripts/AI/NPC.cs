@@ -7,7 +7,9 @@ public class NPC : MonoBehaviour {
     public Vector3 pos2;
     public Vector2 waitTime;
     public GameObject on;
-    public GameObject off;
+    public GameObject off1;
+    public GameObject off2;
+    public GameObject off3;
     //int storyID = 0;
 
     internal bool inView = false; // 是否在視野內
@@ -42,7 +44,9 @@ public class NPC : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z) && !Game.pause && inView)
         {
             on.SetActive(true);
-            off.SetActive(false);
+            off1.SetActive(false);
+            off2.SetActive(false);
+            off3.SetActive(false);
             world.StartTalk(/*storyID*/);
             Game.player().GetComponent<Controller>().Move(0);
         }

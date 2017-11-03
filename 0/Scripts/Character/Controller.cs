@@ -20,6 +20,9 @@ public class Controller : MonoBehaviour
         Physics2D.IgnoreLayerCollision(9, 10);
         Physics2D.IgnoreLayerCollision(9, 11);
         Physics2D.IgnoreLayerCollision(10, 11);
+        Physics2D.IgnoreLayerCollision(9, 12);
+        Physics2D.IgnoreLayerCollision(10, 12);
+        Physics2D.IgnoreLayerCollision(11, 12);
         //Physics2D.IgnoreLayerCollision(11, 11);
         // 取得各類元件
         body = GetComponent<Rigidbody2D>();
