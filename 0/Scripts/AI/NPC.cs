@@ -6,10 +6,7 @@ public class NPC : MonoBehaviour {
     public Vector3 pos1;
     public Vector3 pos2;
     public Vector2 waitTime;
-    public GameObject on;
-    public GameObject off1;
-    public GameObject off2;
-    public GameObject off3;
+    internal OpenUseObject ouo;
     //int storyID = 0;
 
     internal bool inView = false; // 是否在視野內
@@ -17,12 +14,12 @@ public class NPC : MonoBehaviour {
     internal Navigation2D nav;
     internal Animator anim;
     internal World world;
-
-
+    
     void Awake()
     {
         nav = GetComponent<Navigation2D>();
         anim = GetComponent<Animator>();
+        ouo = GetComponent<OpenUseObject>();
         world = FindObjectOfType<World>();
         pos1 += transform.position;
         pos2 += transform.position;
@@ -43,12 +40,14 @@ public class NPC : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Z) && !Game.pause && inView)
         {
-            on.SetActive(true);
-            off1.SetActive(false);
-            off2.SetActive(false);
-            off3.SetActive(false);
+            ouo.enabled = true;//開啟對話框內文字
             world.StartTalk(/*storyID*/);
             Game.player().GetComponent<Controller>().Move(0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Z) && Game.pause && inView) //關閉對話框內文字
+        {
+            ouo.on.SetActive(false);
+            ouo.enabled = false;
         }
     }
 

@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Reset : MonoBehaviour {
+    internal ControllerBattle cb;
 
+    void Awake()
+    {
+        cb = FindObjectOfType<ControllerBattle>();
+    }
     void OnCollisionEnter2D(Collision2D co)
     {
         if (co.gameObject.tag == "Player" && co.contacts[0].normal == -Vector2.up)
         {
-            // Die
-            gameObject.layer = 0;
-            this.enabled = false;
+            cb.Move(0);
+            cb.lockMove = true;
+            cb.anim.SetTrigger("Die");
+            cb.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(Reload());
         }
     }
